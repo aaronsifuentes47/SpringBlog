@@ -10,25 +10,25 @@ public class MathController {
 
     @GetMapping("/add/{num1}/and/{num2}")
     @ResponseBody
-    public String doAdd(@PathVariable int num1, @PathVariable int num2) {
+    public String doAdd(@PathVariable long num1, @PathVariable long num2) {
         return "" + num1 + " plus " + num2 + " is " + (num1 + num2) + "!";
 
     }
     @GetMapping("/subtract/{num1}/and/{num2}")
     @ResponseBody
-    public String doSub(@PathVariable int num1, @PathVariable int num2) {
+    public String doSub(@PathVariable long num1, @PathVariable long num2) {
         return "" + num1 + " minus " + num2 + " is " + (num1 - num2) + "!";
 
     }
     @GetMapping("/multiply/{num1}/and/{num2}")
     @ResponseBody
-    public String doMult(@PathVariable int num1, @PathVariable int num2) {
+    public String doMult(@PathVariable long num1, @PathVariable long num2) {
         return "" + num1 + " times " + num2 + " is " + (num1 * num2) + "!";
 
     }
     @GetMapping("/divide/{num1}/and/{num2}")
     @ResponseBody
-    public String doDiv(@PathVariable int num1, @PathVariable int num2) {
+    public String doDiv(@PathVariable long num1, @PathVariable long num2) {
         return "" + num1 + " divided by " + num2 + " is " + (num1 / num2) + "!";
 
     }

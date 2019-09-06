@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<form action="/dice" method="post">
+    <label for="guess">Guess A Number</label>
+    <input id="guess" name="guess" type="number" min="1" max="20"/>
+    <br/>
+    <label for="diceroll">How Many Dice to Roll</label>
+        <select name="dice" id="diceroll" >
+        <option value="1">Roll One Die</option>
+        <option value="2">Roll Two Dice</option>
+        <option value="3">Roll Three Dice</option>
+        <option value="4">Roll Four Dice</option>
+        <option value="5">Roll Five Dice</option>
+        <option value="6">Roll Six Dice</option>
+    </select>
+    <br/>
+    <button type="submit">submit</button>
+</form>
+</body>
+</html>

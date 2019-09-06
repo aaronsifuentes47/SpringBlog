@@ -18,7 +18,8 @@ public class PostController {
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String individual(@PathVariable int id) {
-        return "individual post page of id #" + id;
+        Post post = new Post();
+        return "show";
     }
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
     @ResponseBody
