@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,8 +18,9 @@ public class PostController {
     }
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String individual(@PathVariable int id) {
-        Post post = new Post();
+    public String individual(@PathVariable int id, Model viewModel) {
+        Post post = new Post("wonderful stuff", "my stuff that I have");
+        viewModel.addAttribute("post", post);
         return "show";
     }
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
