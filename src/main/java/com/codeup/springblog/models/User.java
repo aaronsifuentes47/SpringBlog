@@ -8,16 +8,18 @@ import javax.persistence.*;
 public class User {
 
     @Id @GeneratedValue
-    private int id;
-    @Column(nullable = false)
+    private long id;
+    @Column(nullable = false, length = 100)
     private String username;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String email;
 
 
-    public User(int id, String username, String password, String email) {
+    public User(){}
+
+    public User(long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -30,8 +32,12 @@ public class User {
         this.email = email;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
+    }
+
+    public long setId(long id) {
+        return this.id = id;
     }
 
     public String getUsername() {

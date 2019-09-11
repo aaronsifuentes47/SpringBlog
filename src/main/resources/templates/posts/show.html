@@ -9,6 +9,7 @@
 <h1 th:text="${post.title}"></h1>
 <h3 th:text="'ID: ' + ${post.id}"></h3>
 <p th:text="${post.body}"></p>
+<h5 th:text="'made by '+${post.user.email}"></h5>
 <form th:action="'/posts/'+${post.id}+'/edit'" th:method="get">
     <button type="submit">edit</button>
 </form>

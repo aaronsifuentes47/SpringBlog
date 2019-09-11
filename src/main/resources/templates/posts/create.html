@@ -5,10 +5,14 @@
 </head>
 <body>
 <main class="container">
-    <form action="/posts/create/" th:method="post">
-        <input type="text" name="title"/>
-        <input type="text" name="body"/>
-        <button type="submit">Create</button>
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+        Title:
+        <input th:field="*{title}"/>
+        <br/>
+        Description:
+        <input th:field="*{body}"/>
+        <br/>
+        <input type="submit"/>
     </form>
 </main>
 </body>

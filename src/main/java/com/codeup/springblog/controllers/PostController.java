@@ -2,7 +2,9 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
+import com.codeup.springblog.repos.UserRepository;
 import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,11 @@ import java.util.ArrayList;
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postRepository){
+    public PostController(PostRepository postRepository, UserRepository userRepository){
         postDao = postRepository;
+        userDao = userRepository;
     }
 
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
@@ -62,14 +66,9 @@ public class PostController {
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    public String actualCreate(
-            @RequestParam(name = "title") String titleParam,
-            @RequestParam(name = "body") String descParam
-                               ) {
-        Post postToBeCreated = new Post();
-        postToBeCreated.setTitle(titleParam);
-        postToBeCreated.setBody(descParam);
-        Post savedPost = postDao.save(postToBeCreated);
-        return "redirect:/posts/"+ savedPost.getId();
+    public String actualCreate(Model vModel) {
+        User userDB = userDao.findOne(1L);
+        vModel.addAttribute("post", new Post());
+        return "redirect:/posts";
     }
 }
