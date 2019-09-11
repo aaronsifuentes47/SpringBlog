@@ -1,41 +1,75 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+
+import com.codeup.springblog.repos.PostRepository;
+import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @Controller
 public class PostController {
 
-    @RequestMapping(path = "/index", method = RequestMethod.GET)
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postRepository){
+        postDao = postRepository;
+    }
+
+    @RequestMapping(path = "/posts", method = RequestMethod.GET)
     public String index(Model vModel) {
-        ArrayList<Post> posts = new ArrayList<>();
-        Post stuff = new Post(2,"crappy stuff", "take my junk");
-        Post goods = new Post(3,"good stock", "High Quality goods for sale");
-        posts.add(stuff);
-        posts.add(goods);
-        vModel.addAttribute("posts", posts);
+        vModel.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
+
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
-    public String individual(@PathVariable int id, Model viewModel) {
-        Post post = new Post(1,"wonderful stuff", "my stuff that I have");
-        viewModel.addAttribute("post", post);
-        return "show";
+    public String individual(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("post", postDao.findOne(id));
+        return "posts/show";
     }
+
+    @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.GET)
+    public String edit(@PathVariable long id, Model vModel) {
+        Post post = postDao.findOne(id);
+        vModel.addAttribute("post", post);
+        return "posts/edit";
+    }
+
+    @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.POST)
+    public String editForm(@PathVariable long id,
+                           @RequestParam(name="title")String title,
+                           @RequestParam(name="body")String body) {
+        Post updatePost = postDao.findOne(id);
+        updatePost.setBody(body);
+        updatePost.setTitle(title);
+        postDao.save(updatePost);
+        System.out.println("redirect:posts/" +updatePost.getId());
+        return "redirect:";
+    }
+
+    @PostMapping("posts/{id}/delete")
+    public String delete(@PathVariable long id) {
+        postDao.delete(id);
+        return "redirect:/posts";
+    }
+
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    @ResponseBody
     public String viewCreate() {
-        return "view create page!";
+        return "posts/create";
     }
+
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    public String actualCreate() {
-        return "create post!";
+    public String actualCreate(
+            @RequestParam(name = "title") String titleParam,
+            @RequestParam(name = "body") String descParam
+                               ) {
+        Post postToBeCreated = new Post();
+        postToBeCreated.setTitle(titleParam);
+        postToBeCreated.setBody(descParam);
+        Post savedPost = postDao.save(postToBeCreated);
+        return "redirect:/posts/"+ savedPost.getId();
     }
 }

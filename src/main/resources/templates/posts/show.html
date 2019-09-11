@@ -2,11 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-<!--<th:block th:replace="fragments/header :: my-header('Page')"></th:block>-->
+    <th:block th:replace="fragments/header :: main-header('Show Post')" />
     <title>index</title>
 </head>
 <body>
 <h1 th:text="${post.title}"></h1>
+<h3 th:text="'ID: ' + ${post.id}"></h3>
 <p th:text="${post.body}"></p>
+<form th:action="'/posts/'+${post.id}+'/edit'" th:method="get">
+    <button type="submit">edit</button>
+</form>
 </body>
 </html>

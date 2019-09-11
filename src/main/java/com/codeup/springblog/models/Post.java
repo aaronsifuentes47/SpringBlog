@@ -1,7 +1,6 @@
 package com.codeup.springblog.models;
 
 import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,11 +13,18 @@ public class Post {
     private String title;
     @Column(nullable = false)
     private String body;
+    @OneToOne
+    private User user;
 
     public Post(){}
 
     public Post(long id, String title, String body) {
         this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
+    public Post(String title, String body){
         this.title = title;
         this.body = body;
     }
