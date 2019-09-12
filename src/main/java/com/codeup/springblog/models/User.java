@@ -1,11 +1,18 @@
 package com.codeup.springblog.models;
 
 
+import com.codeup.springblog.repos.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+
+    private UserRepository users;
+    private PasswordEncoder pwEncoder;
+
 
     @Id @GeneratedValue
     private long id;
@@ -18,6 +25,14 @@ public class User {
 
 
     public User(){}
+
+    public User(User copy) {
+        id = copy.id;
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+
+    }
 
     public User(long id, String username, String password, String email) {
         this.id = id;

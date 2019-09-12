@@ -5,9 +5,11 @@
 </head>
 <body>
 <div th:each="post:${posts}">
-    <h1 th:text="${post.title}"></h1>
-    <h3 th:text="'ID: ' + ${post.id}"></h3>
-    <p th:text="${post.body}"></p>
+    <a style="font-size: 2em" th:href="'/posts/' + ${post.id}" th:text="${post.title}"></a>
+</div>
+<hr/>
+<div>
+    <a href="/posts/create">create</a>
 </div>
 </body>
 </html>

@@ -5,12 +5,13 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.codehaus.groovy.transform.SourceURIASTTransformation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 
 @Controller
 public class PostController {
@@ -18,9 +19,13 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
 
+    @Autowired
+    private EmailService emailService;
+
     public PostController(PostRepository postRepository, UserRepository userRepository){
-        postDao = postRepository;
-        userDao = userRepository;
+        this.postDao = postRepository;
+        this.userDao = userRepository;
+
     }
 
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
@@ -50,7 +55,6 @@ public class PostController {
         updatePost.setBody(body);
         updatePost.setTitle(title);
         postDao.save(updatePost);
-        System.out.println("redirect:posts/" +updatePost.getId());
         return "redirect:";
     }
 
@@ -61,14 +65,15 @@ public class PostController {
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    public String viewCreate() {
+    public String viewCreate(Model vModel) {
+        vModel.addAttribute("post", new Post());
         return "posts/create";
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    public String actualCreate(Model vModel) {
-        User userDB = userDao.findOne(1L);
-        vModel.addAttribute("post", new Post());
+    public String actualCreate(@ModelAttribute Post post) {
+//        User userDB = userDao.findOne(1L);
+        postDao.save(post);
         return "redirect:/posts";
     }
 }
