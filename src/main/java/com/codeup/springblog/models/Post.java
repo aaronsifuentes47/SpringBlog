@@ -17,6 +17,20 @@ public class Post {
     private User user;
 
 
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+//    private List<AdImage> images;
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "ads_categories",
+//            joinColumns = {@JoinColumn(name="ad_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+//    )
+//    private List<AdCategory> categories;
+
+
+    public Post(){}
+
     public User getUser() {
         return user;
     }
@@ -24,8 +38,6 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Post(){}
 
     public Post(long id, String title, String body) {
         this.id = id;

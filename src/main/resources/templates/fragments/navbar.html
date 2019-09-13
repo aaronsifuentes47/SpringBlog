@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
-<th:block th:fragment="navbar">
-    <nav>
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </nav>
-</th:block>
+<nav class="navbar navbar-light" th:fragment="navbar">
+    <ul class="nav nav-pills mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/home">home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/posts">posts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login">log in</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/sign-up">sign up</a>
+        </li>
+    </ul>
+</nav>
 
 </body>
 </html>

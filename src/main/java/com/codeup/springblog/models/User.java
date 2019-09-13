@@ -2,6 +2,7 @@ package com.codeup.springblog.models;
 
 
 import com.codeup.springblog.repos.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -9,9 +10,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
-
-    private UserRepository users;
-    private PasswordEncoder pwEncoder;
 
 
     @Id @GeneratedValue
@@ -22,6 +20,7 @@ public class User {
     private String password;
     @Column(nullable = false, length = 100)
     private String email;
+
 
 
     public User(){}
