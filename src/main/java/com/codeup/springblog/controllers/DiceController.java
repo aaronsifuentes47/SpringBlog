@@ -48,14 +48,17 @@ public class DiceController {
     @GetMapping("/roll-dice/2")
     @ResponseBody
     public String rollTwo(){
+        int[] rolls = new int[2];
         int random = (int) Math.floor(Math.random() * 20);
-        int random2 = (int) Math.floor(Math.random() * 20);
+        for (int i = 0; i <= 1; i++) {
+            rolls[i] = random;
+        }
         String answer = "You\'re rolling two dice! \n" +
-                "You rolled: " + random + " and " + random2 + "\n" +
+                "You rolled: " + rolls[0] + " and " + rolls[1] + "\n" +
                 "You guessed: " + this.guess;
-        if (this.guess == random || this.guess == random2) {
+        if (this.guess == rolls[0] || this.guess == rolls[1] ) {
             return answer + "\n You won!";
-        } else if (this.guess != random || this.guess != random2) {
+        } else if (this.guess != rolls[0] || this.guess != rolls[1]) {
             return answer + "\n You lost! Nice!";
         } else {
             return "why are you here?";

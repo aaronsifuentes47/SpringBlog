@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
-<nav class="navbar navbar-light" th:fragment="navbar">
+<nav class="navbar navbar-dark bg-dark" th:fragment="navbar">
     <ul class="nav nav-pills mr-auto">
         <li class="nav-item">
             <a class="nav-link" href="/home">home</a>
@@ -13,12 +14,21 @@
         <li class="nav-item">
             <a class="nav-link" href="/posts">posts</a>
         </li>
+        <th:block sec:authorize="isAnonymous()">
         <li class="nav-item">
             <a class="nav-link" href="/login">log in</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/sign-up">sign up</a>
         </li>
+        </th:block>
+        <th:block sec:authorize="isAuthenticated()">
+        <li>
+            <form th:action="@{/logout}" th:method="post">
+                <button class="btn-link btn" style="margin-top: 1px">Logout</button>
+            </form>
+        </li>
+        </th:block>
     </ul>
 </nav>
 

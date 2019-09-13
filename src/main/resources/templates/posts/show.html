@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8"/>
     <th:block th:replace="fragments/header :: my-header('Show Post')" />
@@ -12,9 +13,11 @@
     <br/>
     <p th:text="${post.body}"></p>
     <!--<h5 th:text="'made by '+${post.user.email}"></h5>-->
+    <th:block sec:authorize="isAuthenticated()">
     <form th:action="'/posts/'+${post.id}+'/edit'" th:method="get">
         <button type="submit">edit</button>
     </form>
+    </th:block>
 </div>
 </body>
 </html>
