@@ -2,18 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
                 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <th:block th:replace="fragments/header :: my-header('Posts')"></th:block>
+    <th:block th:replace="fragments/header :: my-header('Posts')"/>
 </head>
 <body>
-<th:block th:replace="fragments/navbar :: navbar"></th:block>
+<th:block th:replace="fragments/navbar :: navbar"/>
 <div class="container">
+    <h1>All Posts</h1>
+    <hr/>
     <div th:each="post:${posts}">
-        <a style="font-size: 2em" th:href="'/posts/' + ${post.id}" th:text="${post.title}"></a>
+        <a style="font-size: 1.5em" th:href="'/posts/' + ${post.id}" th:text="${post.title}"></a>
     </div>
+    <a href="/posts/create">create</a>
 </div>
     <hr/>
-    <div>
-    <a href="/posts/create">create</a>
+    <div class="container">
 </div>
 </body>
 </html>

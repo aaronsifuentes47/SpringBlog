@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: my-header('profile')"/>
+</head>
+<body>
+    <th:block th:replace="fragments/navbar :: navbar"/>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <h5>User Name: <span th:text="${user.username}"></span></h5>
+                <br/>
+                <h5>Email: <span th:text="${user.email}"></span></h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

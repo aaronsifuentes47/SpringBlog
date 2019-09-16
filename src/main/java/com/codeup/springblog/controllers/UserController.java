@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,13 @@ public class UserController {
         this.userRepository = userRepo;
         this.passwordEncoder = passwordEncoder;
 
+    }
+
+    @RequestMapping(path = "/profile", method = RequestMethod.GET)
+    public String showProfile(Model vModel) {
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        vModel.addAttribute("user", userSession);
+        return "users/profile";
     }
 
 
