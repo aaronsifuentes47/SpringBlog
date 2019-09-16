@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <th:block th:replace="fragments/header :: my-header('Sign Up')" />
-</head>
-<body>
-<th:block th:replace="fragments/navbar :: navbar"/>
-<div class="container">
-<h1>Create an account</h1>
-    <br/>
-    <form th:action="@{/sign-up}" method="post" th:object="${user}">
-        <label for="username">Username</label>
-        <input id="username" th:field="*{username}"/>
+    <head>
+        <th:block th:replace="fragments/header :: my-header('Sign Up')" />
+    </head>
+    <body>
+        <th:block th:replace="fragments/navbar :: navbar"/>
         <br/>
-        <label for="email">Email</label>
-        <input id="email" th:field="*{email}"/>
-        <br/>
-        <label for="password">Password</label>
-        <input id="password" type="password" th:field="*{password}"/>
-        <br/>
-        <input value="Sign Up" type="submit"/>
-    </form>
-</div>
-
-</body>
+        <div class="container">
+            <h1>Create an account</h1>
+            <br/>
+            <form th:action="@{/sign-up}" method="post" th:object="${user}">
+                <label for="username">Username</label>
+                <input id="username" th:field="*{username}"/>
+                <br/>
+                <label for="email">Email</label>
+                <input id="email" th:field="*{email}"/>
+                <br/>
+                <label for="password">Password</label>
+                <input id="password" type="password" th:field="*{password}"/>
+                <br/>
+                <br/>
+                <input value="Sign Up" type="submit"/>
+            </form>
+        </div>
+    </body>
 </html>

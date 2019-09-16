@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
                 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <th:block th:replace="fragments/header :: my-header('Posts')"/>
-</head>
-<body>
-<th:block th:replace="fragments/navbar :: navbar"/>
-<div class="container">
-    <h1>All Posts</h1>
-    <hr/>
-    <div th:each="post:${posts}">
-        <a style="font-size: 1.5em" th:href="'/posts/' + ${post.id}" th:text="${post.title}"></a>
-    </div>
-    <a href="/posts/create">create</a>
-</div>
-    <hr/>
-    <div class="container">
-</div>
-</body>
+    <head>
+        <th:block th:replace="fragments/header :: my-header('Posts')"/>
+    </head>
+    <body>
+        <th:block th:replace="fragments/navbar :: navbar"/>
+        <br/>
+        <div class="container">
+            <h1>All Posts</h1>
+            <hr/>
+            <div class="row">
+                <div class="col-3 border rounded text-center" th:each="post:${posts}">
+                    <br/>
+                    <h5 class="text-left">ID: <span th:text="${post.id}"></span></h5>
+                    <a style="font-size: 1.5em" th:href="'/posts/' + ${post.id}" th:text="${post.title}"></a>
+                    <br/>
+                    <span th:text="'made by ' + ${post.user.username}"></span>
+                </div>
+            </div>
+        </div>
+        <a href="/posts/create">create</a>
+            <hr/>
+            <div class="container">
+        </div>
+    </body>
 </html>

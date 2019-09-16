@@ -45,6 +45,7 @@ public class DiceController {
         }
 
     }
+
     @GetMapping("/roll-dice/2")
     @ResponseBody
     public String rollTwo(){

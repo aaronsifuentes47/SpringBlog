@@ -23,11 +23,14 @@
         </li>
         </th:block>
         <th:block sec:authorize="isAuthenticated()">
-        <li>
-            <form th:action="@{/logout}" th:method="post">
-                <button class="btn-link btn" style="margin-top: 1px">Logout</button>
-            </form>
-        </li>
+            <li>
+                <a class="nav-link" href="/profile">profile</a>
+            </li>
+            <li>
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="btn-link btn" style="margin-top: 1px">Logout</button>
+                </form>
+            </li>
         </th:block>
     </ul>
 </nav>

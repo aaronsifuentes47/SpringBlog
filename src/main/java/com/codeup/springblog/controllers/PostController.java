@@ -42,7 +42,10 @@ public class PostController {
 
     @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.GET)
     public String edit(@PathVariable long id, Model vModel) {
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post post = postDao.findOne(id);
+        boolean check = userSession.getId() == post.getUser().getId();
+        vModel.addAttribute("editPerm", check);
         vModel.addAttribute("post", post);
         return "posts/edit";
     }

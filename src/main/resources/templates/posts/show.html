@@ -8,13 +8,15 @@
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: navbar"/>
+<br/>
 <div class="container">
     <h1 th:text="${post.title}"></h1>
     <br/>
     <p th:text="${post.body}"></p>
     <!--<h5 th:text="'made by '+${post.user.email}"></h5>-->
     <th:block sec:authorize="isAuthenticated()">
-    <form th:action="'/posts/'+${post.id}+'/edit'" th:method="get">
+
+    <form  th:action="'/posts/'+${post.id}+'/edit'" th:method="get">
         <button type="submit">edit</button>
     </form>
     </th:block>
