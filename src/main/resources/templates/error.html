@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:replace="fragments/header :: my-header('Error')"/>
+    </head>
+    <body>
+        <th:block th:replace="fragments/navbar :: navbar"/>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <h1 class="offset-4">oops. I broke it.</h1>
+                <iframe
+                        width="420"
+                        height="315"
+                        src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
+                        frameborder="0"
+                        allowfullscreen="allowfullscreen"
+                >
+                </iframe>
+            </div>
+        </div>
+    </body>
+</html>
