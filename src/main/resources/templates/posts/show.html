@@ -14,9 +14,8 @@
     <br/>
     <p th:text="${post.body}"></p>
     <!--<h5 th:text="'made by '+${post.user.email}"></h5>-->
-    <th:block sec:authorize="isAuthenticated()">
-
-    <form  th:action="'/posts/'+${post.id}+'/edit'" th:method="get">
+    <th:block th:if="${findUser} == ${post.user}">
+    <form th:action="'/posts/'+${post.id}+'/edit'" th:method="get">
         <button type="submit">edit</button>
     </form>
     </th:block>

@@ -35,15 +35,28 @@ public class PostController {
     }
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
-    public String individual(@PathVariable long id, Model viewModel) {
-        viewModel.addAttribute("post", postDao.findOne(id));
+    public String individual(@PathVariable long id, Model vModel) {
+        try {
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User findUser  = userDao.findById(userSession.getId());
+        vModel.addAttribute("findUser", findUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        Post post = postDao.findOne(id);
+        vModel.addAttribute("post", post);
+        }
         return "posts/show";
     }
 
     @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.GET)
     public String edit(@PathVariable long id, Model vModel) {
         User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User findUser  = userDao.findById(userSession.getId());
         Post post = postDao.findOne(id);
+        if (post.getUser() != findUser)  {
+            return "redirect:/posts";
+        }
         boolean check = userSession.getId() == post.getUser().getId();
         vModel.addAttribute("editPerm", check);
         vModel.addAttribute("post", post);

@@ -15,7 +15,6 @@ public class AuthenticationController {
             User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return "redirect:/profile";
         } catch (Exception e){
-            e.printStackTrace();
         return "users/login";
         }
     }
